@@ -1,46 +1,56 @@
-import React, { useState } from "react";
-import { useEffect } from "react/hooks";
-import { useRef } from "react";
-import { Camera } from "react-webcam";
+import React, { useEffect, useRef } from 'react';
 
-const App = () => {
-  const [image, setImage] = useState(null);
-  const [camera, setCamera] = useState(null);
+function App() {
+  // Ref para la etiqueta de vídeo
+  const videoRef = useRef(null);
 
   useEffect(() => {
-    // Inicializa la cámara web
-    const cameraRef = useRef();
-    setCamera(new Camera(cameraRef, {
-      width: 640,
-      height: 480,
-    }));
+    // Código para cargar el script de Soul Machines
+    const script = document.createElement('script');
+    script.src = 'https://static.soulmachines.com/widget-snippet-1.12.0.min.js';
+    script.dataset.smApiKey = 'YOUR_API_KEY'; // Reemplaza con tu clave API
 
-    // Inicia la captura de la cámara web
-    camera.start();
+    // Añadir el script al cuerpo del documento
+    document.body.appendChild(script);
 
-    // Obtiene una imagen de la cámara web
-    const getImage = async () => {
-      const data = await camera.getImageData();
-      setImage(data);
+    // Código para acceder a la cámara web y mostrarla en la mitad derecha
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+      })
+      .catch((error) => {
+        console.error('Error al acceder a la cámara: ', error);
+      });
+
+    return () => {
+      // Limpia el script cuando el componente se desmonte
+      document.body.removeChild(script);
     };
-
-    // Llama a `getImage()` cada segundo
-    setInterval(getImage, 1000);
   }, []);
 
   return (
-    <div>
-      <div style={{ width: "50%" }}>
+    <div className="App">
+      <div className="left-half">
+        {/* Contenedor para el script de Soul Machines */}
+        {/* Asegúrate de reemplazar YOUR_API_KEY con tu clave API real */}
         <script
           src="https://static.soulmachines.com/widget-snippet-1.12.0.min.js"
-          data-sm-api-key="YOUR_API_KEY"
+          data-sm-api-key="eyJzb3VsSWQiOiJkZG5hLWRhbmllbC1hbGFyY29uLS1kaWdpdGFsLWNoaWVmLWV4cGVyaWVuY2UiLCJhdXRoU2VydmVyIjoiaHR0cHM6Ly9kaC5hei5zb3VsbWFjaGluZXMuY2xvdWQvYXBpL2p3dCIsImF1dGhUb2tlbiI6ImFwaWtleV92MV9lNmYxZTA3OS00ODI1LTQ2YjUtYjE5ZC05YjEwYzRjNDUzNjEifQ=="
         ></script>
       </div>
-      <div style={{ width: "50%" }}>
-        {image && <img src={image} />}
+      <div className="right-half">
+        {/* Contenedor para mostrar la cámara web */}
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          width="100%"
+          height="100%"
+        ></video>
       </div>
     </div>
   );
-};
+}
 
 export default App;
