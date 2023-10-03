@@ -176,8 +176,8 @@ FeedbackModal.propTypes = {
 
 FeedbackModal.defaultProps = {
   closeText: 'Close',
-  denyFeedbackText: '', // Valor por defecto para denyFeedbackText
-  denyFeedback: null,    // Valor por defecto para denyFeedback
+  denyFeedbackText: '',
+  denyFeedback: null,
 };
 
 export default styled(FeedbackModal)`
