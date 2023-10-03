@@ -176,6 +176,8 @@ FeedbackModal.propTypes = {
 
 FeedbackModal.defaultProps = {
   closeText: 'Close',
+  denyFeedbackText: '', // Valor por defecto para denyFeedbackText
+  denyFeedback: null,    // Valor por defecto para denyFeedback
 };
 
 export default styled(FeedbackModal)`
@@ -218,46 +220,69 @@ export default styled(FeedbackModal)`
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &.rating-tag-selected {
-      background: #212529;
-      color: #FFF;
-      &:hover {
-        background: #0e1012;
-        color: #FFF;
-      }
+    transition: 0.2s ease-out;
+    @media (min-width: ${breakpoints.sm}px) {
+      font-size: 1.6rem;
     }
-    &:hover {
-      background: #DCDCDC;
+    @media (min-width: ${breakpoints.md}px) {
+      font-size: 2rem;
     }
-
   }
-
+  .rating-tag-selected {
+    background: #000;
+    color: #FFF;
+    transition: 0.2s ease-in;
+  }
   .custom-items {
-    width: 20rem;
-
-    button, input {
-      font-size: 1.3rem;
-      padding: .5rem;
-    }
-    input {
-      border: 1px solid gray;
-    }
-  }
-
-  .tutorial-icon {
-    width: 180px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: #EAEAEA;
+    align-items: flex-start;
   }
   .tutorial-icon-dp {
     background-image: url(${landingBackgroundImage});
-    background-size: cover;
-    background-position: bottom center;
+  }
+  .feedback-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .feedback-container > div {
+    width: 100%;
+    max-width: 800px;
+    padding: 1rem;
+    margin: 2rem 0;
+  }
+  textarea {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 2px solid #000;
+    padding: 1rem;
+    font-size: 1.2rem;
+    transition: border-color 0.2s ease-in-out;
+    resize: none;
+
+    &:focus {
+      border-color: #555;
+    }
+  }
+  .btn {
+    font-size: 1.5rem;
+    margin: 0 0.2rem;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    @media (min-width: ${breakpoints.sm}px) {
+      font-size: 2rem;
+    }
+    @media (min-width: ${breakpoints.md}px) {
+      font-size: 2.5rem;
+    }
   }
 `;
