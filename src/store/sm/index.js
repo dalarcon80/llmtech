@@ -6,7 +6,7 @@ import roundObject from '../../utils/roundObject';
 import { meatballString } from './meatball';
 
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
-const API_KEY = 'eyJzb3VsSWQiOiJkZG5hLWRhbmllbC1hbGFyY29uLS1kaWdpdGFs-LWNoaWVmLWV4cGVyaWVuY2UiLCJhdXRoU2VydmVyIjoiaHR0cHM6Ly9kaC5hei5zb3VsbWFjaGluZXMuY2xvdWQvYXBpL2p3dCIsImF1dGhUb2tlbiI6ImFwaWtleV92MV9lNmY1ZTA3OS00ODI1LTQ2YjUtYjE5ZC05YjEwYzRjNDUzNjEifQ==';
+const API_KEY = "eyJzb3VsSWQiOiJkZG5hLWRhbmllbC1hbGFyY29uLS1kaWdpdGFs-LWNoaWVmLWV4cGVyaWVuY2UiLCJhdXRoU2VydmVyIjoiaHR0cHM6Ly9kaC5hei5zb3VsbWFjaGluZXMuY2xvdWQvYXBpL2p3dCIsImF1dGhUb2tlbiI6ImFwaWtleV92MV9lNmY1ZTA3OS00ODI1LTQ2YjUtYjE5ZC05YjEwYzRjNDUzNjEifQ==";
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 const PERSONA_ID = '1';
 // CAMERA_ID commented out because CUE manages camera
